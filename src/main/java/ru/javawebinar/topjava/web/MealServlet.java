@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.web;
 
+import ru.javawebinar.topjava.dao.impl.MealImpl;
 import ru.javawebinar.topjava.model.MealWithExceed;
 import ru.javawebinar.topjava.util.MealsUtil;
 
@@ -15,8 +16,12 @@ import java.util.List;
 public class MealServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MealsUtil mealsUtil = new MealsUtil();
+        MealImpl mealImpl = new MealImpl();
+        if (mealImpl.getAll().isEmpty()) {
+            mealImpl.getAll().addAll(mealsUtil.getMeals());
+        }
         int caloriesPerDay = 2000;
-        List<MealWithExceed> mealWithExceeds = mealsUtil.getFilteredWithExceeded(mealsUtil.getMeals(), caloriesPerDay);
+        List<MealWithExceed> mealWithExceeds = mealsUtil.getFilteredWithExceeded(mealImpl.getAll(), caloriesPerDay);
 
         request.setAttribute("mealWithExceeds", mealWithExceeds);
 

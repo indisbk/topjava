@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -41,7 +42,10 @@ public class MealsUtil {
                 );
 
         return meals.stream()
-                .map(meal -> createWithExceed(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))
+                .map(meal -> {
+                    meal.setId(counterId(meals.indexOf(meal)));
+                    return createWithExceed(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay);
+                })
                 .collect(toList());
     }
 
@@ -105,6 +109,12 @@ public class MealsUtil {
     }
 
     private static MealWithExceed createWithExceed(Meal meal, boolean exceeded) {
-        return new MealWithExceed(meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded);
+        return new MealWithExceed(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded);
+    }
+
+    public AtomicInteger counterId(int index) {
+        AtomicInteger id = new AtomicInteger(index);
+        id.incrementAndGet();
+        return id;
     }
 }
