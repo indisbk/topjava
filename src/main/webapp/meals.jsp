@@ -48,6 +48,34 @@
             </tr>
         </c:forEach>
     </table>
+
+    <div>
+        <div style="float: left">
+            <form action="meals?action=filter" method="post">
+                <dl>
+                <dt>Start Date</dt>
+                    <dd>
+                        <input type="date" name="startDate" value="${param.startDate}">
+                    </dd>
+                <dt>End Date</dt>
+                    <dd>
+                        <input type="date" name="endDate" value="${param.endDate}">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>Start Time</dt>
+                    <dd>
+                        <input type="time" name="startTime" value="${param.startTime}">
+                    </dd>
+                    <dt>End Time</dt>
+                    <dd>
+                        <input type="time" name="endTime" value="${param.endTime}">
+                    </dd>
+                </dl>
+                <button type="submit">Отфильтровать</button>
+            </form>
+        </div>
+    </div>
 </section>
 </body>
 </html>
