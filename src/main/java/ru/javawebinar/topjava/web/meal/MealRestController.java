@@ -7,14 +7,13 @@ import ru.javawebinar.topjava.service.MealService;
 import ru.javawebinar.topjava.to.MealWithExceed;
 import ru.javawebinar.topjava.util.DateTimeUtil;
 import ru.javawebinar.topjava.util.MealsUtil;
-import ru.javawebinar.topjava.web.SecurityUtil;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Objects;
 
 import static ru.javawebinar.topjava.web.SecurityUtil.authUserId;
+import static ru.javawebinar.topjava.web.SecurityUtil.authUserCaloriesPerDay;
 
 @Controller
 public class MealRestController {
@@ -43,7 +42,7 @@ public class MealRestController {
     }
 
     public List<MealWithExceed> getAll() {
-        return MealsUtil.getWithExceeded(service.getAll(authUserId()), MealsUtil.DEFAULT_CALORIES_PER_DAY);
+        return MealsUtil.getWithExceeded(service.getAll(authUserId()), authUserCaloriesPerDay());
     }
 
     public List<MealWithExceed> getBetween(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
@@ -51,7 +50,7 @@ public class MealRestController {
                 startDate != null ? startDate : DateTimeUtil.MIN_DATE,
                 endDate != null ? endDate : DateTimeUtil.MAX_DATE, authUserId());
 
-        return MealsUtil.getFilteredWithExceeded(mealsDateFiltered, SecurityUtil.authUserCaloriesPerDay(),
+        return MealsUtil.getFilteredWithExceeded(mealsDateFiltered, authUserCaloriesPerDay(),
                 startTime != null ? startTime : LocalTime.MIN,
                 endTime != null ? endTime : LocalTime.MAX
         );
