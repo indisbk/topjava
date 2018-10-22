@@ -13,6 +13,7 @@ import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.Util;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +49,7 @@ public class JdbcMealRepositoryImpl implements MealRepository {
         if(meal.isNew()) {
             Number newKey = insertMeal.executeAndReturnKey(map);
             meal.setId(newKey.intValue());
-        } else if (namedParameterJdbcTemplate.update("UPDATE meals SET date_time=:dateTime, description=:description, calories=:calories WHERE id=:id", map) == 0) {
+        } else if (namedParameterJdbcTemplate.update("UPDATE meals SET date_time=:dateTime, description=:description, calories=:calories WHERE id=:id AND user_id=:userId", map) == 0) {
             return null;
         }
 
@@ -68,7 +69,10 @@ public class JdbcMealRepositoryImpl implements MealRepository {
 
     @Override
     public List<Meal> getAll(int userId) {
-        return jdbcTemplate.query("SELECT * FROM meals ORDER BY date_time DESC", ROW_MAPPER, userId);
+        List<Meal> meals = jdbcTemplate.query("SELECT * FROM meals WHERE user_id=?", ROW_MAPPER, userId);
+        return meals.stream()
+                .sorted(Comparator.comparing(Meal::getDate).reversed())
+                .collect(Collectors.toList());
     }
 
     @Override
