@@ -64,7 +64,7 @@ public class MealServiceTest {
     }
 
     @Test
-    public void update() {
+    public void update() throws Exception {
         Meal updated = new Meal(MEAL1_USER);
         updated.setDescription("Завтрак");
         updated.setCalories(200);
