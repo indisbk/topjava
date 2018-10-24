@@ -16,18 +16,18 @@ public class MealTestData {
     public static final int MEAL5_ID = START_SEQ + 6;
     public static final int MEAL6_ID = START_SEQ + 7;
 
-    public static final LocalDateTime startDateTime = LocalDateTime.of(2018, 10, 20, 7, 00, 00);
-    public static final LocalDateTime endDateTime = LocalDateTime.of(2018, 10, 21, 7, 00, 00);
+    public static final LocalDateTime startDateTime = LocalDateTime.of(2018, 10, 20, 7, 0, 0);
+    public static final LocalDateTime endDateTime = LocalDateTime.of(2018, 10, 21, 7, 0, 0);
 
-    public static final Meal MEAL1_USER = new Meal(MEAL1_ID, LocalDateTime.of(2018, 10, 20, 7, 00, 00), "Breakfast", 600);
-    public static final Meal MEAL2_USER = new Meal(MEAL2_ID, LocalDateTime.of(2018, 10, 20, 12, 00, 00), "Lunch", 1000);
-    public static final Meal MEAL3_USER = new Meal(MEAL3_ID, LocalDateTime.of(2018, 10, 21, 7, 00, 00), "Breakfast", 700);
-    public static final Meal MEAL4_USER = new Meal(MEAL4_ID, LocalDateTime.of(2018, 10, 21, 12, 00, 00), "Lunch", 800);
-    public static final Meal MEAL1_ADMIN = new Meal(MEAL5_ID, LocalDateTime.of(2018, 10, 21, 13, 30, 00), "Lunch", 1400);
-    public static final Meal MEAL2_ADMIN = new Meal(MEAL6_ID, LocalDateTime.of(2018, 10, 21, 19, 10, 00), "Dinner", 300);
+    public static final Meal MEAL1_USER = new Meal(MEAL1_ID, LocalDateTime.of(2018, 10, 20, 7, 0, 0), "Breakfast", 600);
+    public static final Meal MEAL2_USER = new Meal(MEAL2_ID, LocalDateTime.of(2018, 10, 20, 12, 0, 0), "Lunch", 1000);
+    public static final Meal MEAL3_USER = new Meal(MEAL3_ID, LocalDateTime.of(2018, 10, 21, 7, 0, 0), "Breakfast", 700);
+    public static final Meal MEAL4_USER = new Meal(MEAL4_ID, LocalDateTime.of(2018, 10, 21, 12, 0, 0), "Lunch", 800);
+    public static final Meal MEAL1_ADMIN = new Meal(MEAL5_ID, LocalDateTime.of(2018, 10, 21, 13, 30, 0), "Lunch", 1400);
+    public static final Meal MEAL2_ADMIN = new Meal(MEAL6_ID, LocalDateTime.of(2018, 10, 21, 19, 10, 0), "Dinner", 300);
 
     public static void assertMatch(Meal actual, Meal expected) {
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isEqualToComparingFieldByField(expected);
     }
 
     public static void assertMatch(Iterable<Meal> actual, Meal... expected) {
@@ -35,7 +35,7 @@ public class MealTestData {
     }
 
     public static void assertMatch(Iterable<Meal> actual, Iterable<Meal> expected) {
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).usingFieldByFieldElementComparator().isEqualTo(expected);
     }
 
 }
