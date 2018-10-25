@@ -1,5 +1,8 @@
 Java Enterprise Online Project 
 ===============================
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5082cbcb98d54fe0a55fed65353ae055)](https://app.codacy.com/app/indisbk/topjava?utm_source=github.com&utm_medium=referral&utm_content=indisbk/topjava&utm_campaign=Badge_Grade_Dashboard)
+
 Разработка полнофункционального Spring/JPA Enterprise приложения c авторизацией и правами доступа на основе ролей с использованием наиболее популярных инструментов и технологий Java: Maven, Spring MVC, Security, JPA(Hibernate), REST(Jackson), Bootstrap (css,js), datatables, jQuery + plugins, Java 8 Stream and Time API и хранением в базах данных Postgresql и HSQLDB.
 
 ![topjava_structure](https://user-images.githubusercontent.com/13649199/27433714-8294e6fe-575e-11e7-9c41-7f6e16c5ebe5.jpg)
@@ -142,6 +145,7 @@ Java Enterprise Online Project
 Все остальное - опционально.
 
 #### HTML, JavaScript, CSS 
+- [Basic HTML and HTML5](https://learn.freecodecamp.org/responsive-web-design/basic-html-and-html5/say-hello-to-html-elements/)
 - [Справочник по WEB](https://developer.mozilla.org/ru/)
 - [Видео по WEB технологиям](https://www.youtube.com/user/WebMagistersRu/playlists)
 - [Изучение JavaScript в одном видео уроке за час](https://www.youtube.com/watch?v=QBWWplFkdzw)
