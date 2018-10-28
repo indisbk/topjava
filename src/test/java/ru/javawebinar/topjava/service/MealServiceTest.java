@@ -1,6 +1,8 @@
 package ru.javawebinar.topjava.service;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,7 @@ import java.time.LocalDate;
 import java.time.Month;
 
 import static ru.javawebinar.topjava.MealTestData.*;
-import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
-import static ru.javawebinar.topjava.UserTestData.USER_ID;
+import static ru.javawebinar.topjava.UserTestData.*;
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
@@ -33,6 +34,9 @@ public class MealServiceTest {
     @Autowired
     private MealService service;
 
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
+
     @Test
     public void delete() throws Exception {
         service.delete(MEAL1_ID, USER_ID);
@@ -44,12 +48,14 @@ public class MealServiceTest {
         service.delete(MEAL1_ID, 1);
     }
 
+
     @Test
     public void create() throws Exception {
         Meal created = getCreated();
         service.create(created, USER_ID);
         assertMatch(service.getAll(USER_ID), created, MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1);
     }
+
 
     @Test
     public void get() throws Exception {
@@ -62,6 +68,7 @@ public class MealServiceTest {
         service.get(MEAL1_ID, ADMIN_ID);
     }
 
+
     @Test
     public void update() throws Exception {
         Meal updated = getUpdated();
@@ -69,10 +76,13 @@ public class MealServiceTest {
         assertMatch(service.get(MEAL1_ID, USER_ID), updated);
     }
 
-    @Test(expected = NotFoundException.class)
+
+    @Test
     public void updateNotFound() throws Exception {
+        exception.expect(NotFoundException.class);
         service.update(MEAL1, ADMIN_ID);
     }
+
 
     @Test
     public void getAll() throws Exception {
