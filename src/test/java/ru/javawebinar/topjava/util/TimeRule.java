@@ -3,10 +3,13 @@ package ru.javawebinar.topjava.util;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static ru.javawebinar.topjava.service.MealServiceTest.*;
 
 public class TimeRule implements TestRule {
+    private static final Logger log = LoggerFactory.getLogger(TimeRule.class);
 
     private String name;
 
@@ -22,7 +25,9 @@ public class TimeRule implements TestRule {
                 base.evaluate();
                 long after = System.nanoTime();
                 testTime = (after - before)/1000000;
+                log.info("Time of test: {}", testTime);
                 testSummary.put(name, testTime);
+
             }
         };
     }
