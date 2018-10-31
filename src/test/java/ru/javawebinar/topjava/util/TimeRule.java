@@ -25,7 +25,9 @@ public class TimeRule implements TestRule {
                 base.evaluate();
                 long after = System.nanoTime();
                 testTime = (after - before)/1000000;
+                log.info("************INFO ABOUT TIME************");
                 log.info("Time of test: {}", testTime);
+                log.info("************INFO ABOUT TIME************");
                 testSummary.put(name, testTime);
 
             }

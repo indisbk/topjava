@@ -38,8 +38,7 @@ public class Meal extends AbstractBaseEntity {
     @Range(max = 10000)
     private int calories;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     public Meal() {

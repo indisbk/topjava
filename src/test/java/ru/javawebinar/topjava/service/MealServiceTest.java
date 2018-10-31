@@ -44,9 +44,11 @@ public class MealServiceTest {
 
     @AfterClass
     public static void viewSummary(){
+        log.info("***********TEST SUMMARY***********");
         for (Map.Entry<String, Long> entry : testSummary.entrySet()) {
-            log.info("Test: {} time: {}", entry.getKey(), entry.getValue());
+            log.info("Test: {} Time: {}", entry.getKey(), entry.getValue());
         }
+        log.info("************** END ***************");
     }
 
     @Rule
