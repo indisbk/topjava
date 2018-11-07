@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.model.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,14 +19,9 @@ public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
     @Override
     Meal save(Meal entity);
 
-    @Modifying
-    @Query("SELECT m FROM Meal m WHERE m.user.id=:userId ORDER BY m.dateTime DESC")
-    List<Meal> findAll(@Param("userId") int userId);
+    List<Meal> findAllByUserIdOrderByDateTimeDesc(int userId);
 
-    @Modifying
-    @Query("SELECT m FROM Meal m " +
-            "WHERE m.user.id=:userId AND m.dateTime BETWEEN :startDate AND :endDate ORDER BY m.dateTime DESC")
-    List<Meal> findBetween(@Param("startDate")LocalDateTime startDate, @Param("endDate")LocalDateTime endDate, @Param("userId")int userId);
+    List<Meal> findAllByUserIdAndDateTimeBetweenOrderByDateTimeDesc(int userId, LocalDateTime startDate, LocalDateTime endDate);
 
     @Override
     Optional<Meal> findById(Integer integer);
@@ -34,4 +30,6 @@ public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
     @Modifying
     @Query("DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:userId")
     int deleteById(@Param("id")int id, @Param("userId")int userId);
+
+    List<Meal> getAllByUserOrderByDateTimeDesc(User user);
 }

@@ -18,7 +18,7 @@ import java.util.List;
 
 @Repository
 @Profile("jdbc")
-public abstract class AbstractJdbcMealRepository implements MealRepository {
+public abstract class AbstractJdbcMealRepository <T> implements MealRepository {
 
     private static final RowMapper<Meal> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Meal.class);
 
@@ -85,5 +85,5 @@ public abstract class AbstractJdbcMealRepository implements MealRepository {
 
     protected abstract MapSqlParameterSource createMap(Meal meal, int userId);
 
-    protected abstract <T> T getValue(LocalDateTime date);
+    protected abstract T getValue(LocalDateTime date);
 }
