@@ -53,7 +53,7 @@ public class DataJpaMealRepositoryImpl implements MealRepository {
     }
 
     @Override
-    public List<Meal> getAll(User user) {
-        return crudRepository.getAllByUserOrderByDateTimeDesc(user);
+    public Meal getByUserId(Integer id, Integer userId) {
+        return crudRepository.getByUserId(id, userId);
     }
 }

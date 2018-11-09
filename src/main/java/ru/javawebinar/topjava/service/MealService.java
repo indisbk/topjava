@@ -27,5 +27,7 @@ public interface MealService {
 
     Meal create(Meal meal, int userId);
 
-    List<Meal> getAllByUser(User user);
+    default Meal getByUserId(Integer id, Integer userId) {
+        return null;
+    }
 }

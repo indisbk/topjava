@@ -19,4 +19,8 @@ public interface UserService {
     void update(User user);
 
     List<User> getAll();
+
+    default User getByMeals(Integer id) {
+        return null;
+    }
 }

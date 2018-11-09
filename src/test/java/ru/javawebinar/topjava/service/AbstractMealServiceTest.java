@@ -139,4 +139,11 @@ public abstract class AbstractMealServiceTest {
                 LocalDate.of(2015, Month.MAY, 30),
                 LocalDate.of(2015, Month.MAY, 30), USER_ID), MEAL3, MEAL2, MEAL1);
     }
+
+    @Test
+    public void getMealWithUser() throws Exception {
+        Meal meal = service.getByUserId(MEAL1_ID, USER_ID);
+
+        assertMatch(meal, MEAL1);
+    }
 }
