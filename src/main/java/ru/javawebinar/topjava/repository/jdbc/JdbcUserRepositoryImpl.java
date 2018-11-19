@@ -94,15 +94,13 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> getAll() {
-        List<User> users = namedParameterJdbcTemplate.query("SELECT u.id, u.name, u.email, u.password, u.registered, u.enabled, u.calories_per_day, r.role AS roles FROM users u LEFT JOIN user_roles r ON u.id = r.user_id", new UsersWithRolesExtractor());
-        users.sort(Comparator.comparing(User::getName).thenComparing(User::getEmail));
-        return users;
+        return namedParameterJdbcTemplate.query("SELECT u.id, u.name, u.email, u.password, u.registered, u.enabled, u.calories_per_day, r.role AS roles FROM users u LEFT JOIN user_roles r ON u.id = r.user_id ORDER BY name, email", new UsersWithRolesExtractor());
     }
 
     private static final class UsersWithRolesExtractor implements ResultSetExtractor<List<User>> {
         @Override
         public List<User> extractData(ResultSet rs) throws SQLException, DataAccessException {
-            Map<Integer, User> map = new HashMap<>();
+            Map<Integer, User> map = new LinkedHashMap<>();
             User user = null;
             while (rs.next()) {
                 var roles = new HashSet<Role>();
