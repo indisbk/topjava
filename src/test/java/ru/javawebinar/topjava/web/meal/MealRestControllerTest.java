@@ -1,7 +1,6 @@
 package ru.javawebinar.topjava.web.meal;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import ru.javawebinar.topjava.model.Meal;
@@ -9,11 +8,8 @@ import ru.javawebinar.topjava.web.AbstractControllerTest;
 import ru.javawebinar.topjava.web.SecurityUtil;
 import ru.javawebinar.topjava.web.json.JsonUtil;
 
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.List;
 
-import static java.time.LocalDateTime.of;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -27,12 +23,6 @@ import static ru.javawebinar.topjava.util.MealsUtil.getWithExcess;
 class MealRestControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = MealRestController.REST_URL + '/';
-
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private final LocalDateTime START_DATE_TIME = of(2015, Month.MAY, 30, 7, 0);
-
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private final LocalDateTime END_DATE_TIME = of(2015, Month.MAY, 30, 15, 0);
 
     @Test
     void testGet() throws Exception {
@@ -89,7 +79,9 @@ class MealRestControllerTest extends AbstractControllerTest {
 
     @Test
     void testGetBetweenDateTime() throws Exception {
-        mockMvc.perform(get(REST_URL + "filters?start=" + START_DATE_TIME + "&end=" + END_DATE_TIME))
+        mockMvc.perform(get(REST_URL + "filters")
+                .param("startDate", "2015-05-30").param("startTime", "07:00")
+                .param("endDate", "2015-05-30").param("endTime", "15:00"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(contentJson(getWithExcess(List.of(MEAL2, MEAL1), DEFAULT_CALORIES_PER_DAY)));
