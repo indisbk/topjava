@@ -1,26 +1,20 @@
-const ajaxUrl = "ajax/admin/users/";
+const ajaxUrl = "ajax/profile/meals/";
 let datatableApi;
 
 // $(document).ready(function () {
 $(function () {
-    datatableApi = $("#dataTableUser").DataTable({
+    datatableApi = $("#dataTableMeal").DataTable({
         "paging": false,
         "info": true,
         "columns": [
             {
-                "data": "name"
+                "data": "dateTime"
             },
             {
-                "data": "email"
+                "data": "description"
             },
             {
-                "data": "roles"
-            },
-            {
-                "data": "enabled"
-            },
-            {
-                "data": "registered"
+                "data": "calories"
             },
             {
                 "defaultContent": "Edit",
@@ -34,26 +28,26 @@ $(function () {
         "order": [
             [
                 0,
-                "asc"
+                "desc"
             ]
         ]
     });
     makeEditable();
 });
 
-function addUser() {
-    $("#detailsFormUser").find(":input").val("");
-    $("#editRowUser").modal();
+function addMeal() {
+    $("#detailsFormMeal").find(":input").val("");
+    $("#editRowMeal").modal();
 }
 
-function saveUser() {
-    let form = $("#detailsFormUser");
+function saveMeal() {
+    let form = $("#detailsFormMeal");
     $.ajax({
         type: "POST",
         url: ajaxUrl,
         data: form.serialize()
     }).done(function () {
-        $("#editRowUser").modal("hide");
+        $("#editRowMeal").modal("hide");
         updateTable();
         successNoty("Saved");
     });

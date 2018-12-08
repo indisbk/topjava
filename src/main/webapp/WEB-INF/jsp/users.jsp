@@ -13,11 +13,11 @@
 <div class="jumbotron pt-4">
     <div class="container">
         <h3 class="text-center"><spring:message code="user.title"/></h3>
-        <button class="btn btn-primary" onclick="add()">
+        <button class="btn btn-primary" onclick="addUser()">
             <span class="fa fa-plus"></span>
             <spring:message code="common.add"/>
         </button>
-        <table class="table table-striped" id="datatable">
+        <table class="table table-striped" id="dataTableUser">
             <thead>
             <tr>
                 <th><spring:message code="user.name"/></th>
@@ -46,7 +46,7 @@
     </div>
 </div>
 
-<div class="modal fade" tabindex="-1" id="editRow">
+<div class="modal fade" tabindex="-1" id="editRowUser">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -54,7 +54,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form id="detailsForm">
+                <form id="detailsFormUser">
                     <input type="hidden" id="id" name="id">
 
                     <div class="form-group">
@@ -81,7 +81,7 @@
                     <span class="fa fa-close"></span>
                     <spring:message code="common.cancel"/>
                 </button>
-                <button type="button" class="btn btn-primary" onclick="save()">
+                <button type="button" class="btn btn-primary" onclick="saveUser()">
                     <span class="fa fa-check"></span>
                     <spring:message code="common.save"/>
                 </button>

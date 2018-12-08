@@ -11,11 +11,6 @@ function makeEditable() {
     $.ajaxSetup({cache: false});
 }
 
-function add() {
-    $("#detailsForm").find(":input").val("");
-    $("#editRow").modal();
-}
-
 function deleteRow(id) {
     $.ajax({
         url: ajaxUrl + id,
@@ -29,19 +24,6 @@ function deleteRow(id) {
 function updateTable() {
     $.get(ajaxUrl, function (data) {
         datatableApi.clear().rows.add(data).draw();
-    });
-}
-
-function save() {
-    let form = $("#detailsForm");
-    $.ajax({
-        type: "POST",
-        url: ajaxUrl,
-        data: form.serialize()
-    }).done(function () {
-        $("#editRow").modal("hide");
-        updateTable();
-        successNoty("Saved");
     });
 }
 
