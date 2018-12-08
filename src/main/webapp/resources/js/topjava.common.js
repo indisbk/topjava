@@ -1,6 +1,6 @@
 function makeEditable() {
     $(".delete").click(function () {
-        deleteRow($(this).attr("id"));
+        deleteRow($(this).closest("tr").data("id"));
     });
 
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
@@ -16,7 +16,7 @@ function deleteRow(id) {
         url: ajaxUrl + id,
         type: "DELETE"
     }).done(function () {
-        updateTable();
+        //updateTable();
         successNoty("Deleted");
     });
 }

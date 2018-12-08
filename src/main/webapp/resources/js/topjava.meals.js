@@ -1,4 +1,5 @@
 const ajaxUrl = "ajax/profile/meals/";
+const ajaxUrlFilter = "ajax/profile/meals/filter"
 let datatableApi;
 
 // $(document).ready(function () {
@@ -34,6 +35,24 @@ $(function () {
     });
     makeEditable();
 });
+
+function filterMeals() {
+    let isEmpty = true;
+    let form = $("#detailsFilter");
+    form.find(":input").each(function () {
+        if ($.trim($(this).val()) !== '') {
+            isEmpty = false;
+        }
+    });
+    $.ajax({
+        type: "GET",
+        url: (isEmpty) ? ajaxUrl : ajaxUrlFilter,
+        data: (isEmpty) ? {} : form.serialize()
+    }).done(function (data) {
+        datatableApi.clear().rows.add(data).draw();
+        successNoty("Meals filtered")
+    });
+}
 
 function addMeal() {
     $("#detailsFormMeal").find(":input").val("");
