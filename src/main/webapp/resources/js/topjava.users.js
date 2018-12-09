@@ -1,4 +1,5 @@
 const ajaxUrl = "ajax/admin/users/";
+const ajaxUrlEnabled = "ajax/admin/users/enabled/";
 let datatableApi;
 
 // $(document).ready(function () {
@@ -40,6 +41,19 @@ $(function () {
     });
     makeEditable();
 });
+
+function changeStatus(id, checkBox) {
+    let flag = checkBox.is(":checked");
+    $.ajax({
+        type: "POST",
+        url: ajaxUrlEnabled,
+        data: {id: id,
+                flag: flag}
+    }).done(function () {
+        updateTable();
+        successNoty(flag ? "active" : "inactive");
+    })
+}
 
 function addUser() {
     $("#detailsFormUser").find(":input").val("");
