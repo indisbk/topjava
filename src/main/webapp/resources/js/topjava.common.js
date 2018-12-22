@@ -89,3 +89,7 @@ function renderEditBtn(data, type, row) {
 function renderDeleteBtn(data, type, row) {
     return "<a onclick='deleteRow(" + row.id + ");'><span class='fa fa-remove'></span></a>";
 }
+
+function formatDate(date) {
+    return date.replace('T', ' ').substr(0, 16);
+}

@@ -11,8 +11,8 @@ import java.util.Objects;
 
 public class MealTo extends BaseTo {
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dateTime;
 
     @NotBlank
