@@ -63,12 +63,16 @@ $(function () {
                     {
                         "orderable": false,
                         "defaultContent": "",
-                        "render": renderEditBtn
+                        "render": {
+                            "display" : renderEditBtn
+                        }
                     },
                     {
                         "orderable": false,
                         "defaultContent": "",
-                        "render": renderDeleteBtn
+                        "render": {
+                            "display" : renderDeleteBtn
+                        }
                     }
                 ],
                 "order": [

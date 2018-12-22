@@ -13,6 +13,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.StringJoiner;
 
+import static ru.javawebinar.topjava.util.ValidationUtil.getMessageError;
+
 @RestController
 @RequestMapping("/ajax/admin/users")
 public class AdminAjaxController extends AbstractUserController {
@@ -39,18 +41,8 @@ public class AdminAjaxController extends AbstractUserController {
     @PostMapping
     public ResponseEntity<String> createOrUpdate(@Valid UserTo userTo, BindingResult result) {
         if (result.hasErrors()) {
-            StringJoiner joiner = new StringJoiner("<br>");
-            result.getFieldErrors().forEach(
-                    fe -> {
-                        String msg = fe.getDefaultMessage();
-                        if (msg != null) {
-                            if (!msg.startsWith(fe.getField())) {
-                                msg = fe.getField() + ' ' + msg;
-                            }
-                            joiner.add(msg);
-                        }
-                    });
-            return new ResponseEntity<>(joiner.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
+            String msg = getMessageError(result);
+            return new ResponseEntity<>(msg, HttpStatus.UNPROCESSABLE_ENTITY);
         }
         if (userTo.isNew()) {
             super.create(UserUtil.createNewFromTo(userTo));
