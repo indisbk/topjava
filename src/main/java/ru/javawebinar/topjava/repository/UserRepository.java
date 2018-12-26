@@ -21,4 +21,8 @@ public interface UserRepository {
     default User getWithMeals(int id) {
         throw new UnsupportedOperationException();
     }
+
+    default boolean emailIsExists(String email) {
+        throw new UnsupportedOperationException();
+    }
 }

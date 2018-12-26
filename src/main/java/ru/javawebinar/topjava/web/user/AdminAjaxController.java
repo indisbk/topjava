@@ -40,7 +40,7 @@ public class AdminAjaxController extends AbstractUserController {
     @PostMapping
     public void createOrUpdate(@Valid UserTo userTo, BindingResult result) throws NoSuchMethodException, MethodArgumentNotValidException {
         if (result.hasErrors()) {
-            throw new MethodArgumentNotValidException(new MethodParameter(this.getClass().getDeclaredMethod("createOrUpdate", Meal.class, BindingResult.class), 0), result);
+            throw new MethodArgumentNotValidException(new MethodParameter(this.getClass().getDeclaredMethod("createOrUpdate", UserTo.class, BindingResult.class), 0), result);
         }
         if (userTo.isNew()) {
             super.create(UserUtil.createNewFromTo(userTo));

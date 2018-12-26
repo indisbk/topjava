@@ -16,6 +16,7 @@ import ru.javawebinar.topjava.to.UserTo;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.util.List;
+import java.util.Objects;
 
 import static ru.javawebinar.topjava.util.UserUtil.prepareToSave;
 import static ru.javawebinar.topjava.util.UserUtil.updateFromTo;
@@ -101,5 +102,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User getWithMeals(int id) {
         return checkNotFoundWithId(repository.getWithMeals(id), id);
+    }
+
+    @Override
+    public boolean emailIsExists(String email) {
+        Objects.requireNonNull(email, "Email must not be null");
+        return repository.emailIsExists(email);
     }
 }
