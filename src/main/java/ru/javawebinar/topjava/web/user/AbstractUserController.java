@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.to.UserTo;
-import ru.javawebinar.topjava.web.EmailValidator;
+import ru.javawebinar.topjava.web.validators.EmailValidator;
 
 import java.util.List;
 

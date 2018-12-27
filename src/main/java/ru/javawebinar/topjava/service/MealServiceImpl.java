@@ -8,6 +8,7 @@ import ru.javawebinar.topjava.repository.MealRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 
@@ -58,5 +59,11 @@ public class MealServiceImpl implements MealService {
     @Override
     public Meal getWithUser(int id, int userId) {
         return checkNotFoundWithId(repository.getWithUser(id, userId), id);
+    }
+
+    @Override
+    public boolean dateTimeIsExists(LocalDateTime dateTime, int userId) {
+        Objects.requireNonNull(dateTime, "DateTime must not be null");
+        return repository.dateTimeIsExists(dateTime, userId);
     }
 }

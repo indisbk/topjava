@@ -52,4 +52,9 @@ public class DataJpaMealRepositoryImpl implements MealRepository {
     public Meal getWithUser(int id, int userId) {
         return crudMealRepository.getWithUser(id, userId);
     }
+
+    @Override
+    public boolean dateTimeIsExists(LocalDateTime dateTime, int userId) {
+        return crudMealRepository.existsByDateTimeAndUserId(dateTime, userId);
+    }
 }

@@ -26,4 +26,6 @@ public interface MealService {
     Meal create(Meal meal, int userId);
 
     Meal getWithUser(int id, int userId);
+
+    boolean dateTimeIsExists(LocalDateTime dateTime, int userId);
 }

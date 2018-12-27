@@ -74,4 +74,25 @@ class ProfileRestControllerTest extends AbstractControllerTest {
 
         assertMatch(userService.getByEmail("newemail@ya.ru"), UserUtil.updateFromTo(new User(USER), updatedTo));
     }
+
+    @Test
+    void testRegisterWithDuplicateEmail() throws Exception {
+        UserTo createdTo = new UserTo(null, "Karl", "user@yandex.ru", "pass123", 1500);
+
+        mockMvc.perform(post(REST_URL + "/register").contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(createdTo)))
+                .andDo(print())
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    void testUpdateWithDuplicateEmail() throws Exception {
+        UserTo updatedTo = new UserTo(null, "newName", "admin@gmail.com", "newPassword", 1500);
+
+        mockMvc.perform(put(REST_URL).contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(USER))
+                .content(JsonUtil.writeValue(updatedTo)))
+                .andDo(print())
+                .andExpect(status().isInternalServerError());
+    }
 }

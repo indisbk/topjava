@@ -24,4 +24,8 @@ public interface MealRepository {
     default Meal getWithUser(int id, int userId) {
         throw new UnsupportedOperationException();
     }
+
+    default boolean dateTimeIsExists(LocalDateTime dateTime, int userId) {
+        throw new UnsupportedOperationException();
+    }
 }
