@@ -26,5 +26,13 @@
                 </button>
             </form:form>
         </sec:authorize>
+        <div class="dropdown">
+            <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><spring:message code="app.lang.title"/></button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/login?lang=en"><spring:message code="app.lang.english"/></a>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/login?lang=ru"><spring:message code="app.lang.russian"/></a>
+            </div>
+        </div>
     </div>
 </nav>
